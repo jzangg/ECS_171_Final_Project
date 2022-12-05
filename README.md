@@ -12,12 +12,19 @@
 
 For our project, we wanted to predict if an individual has diabetes based on a variety of factors in order to diagnose the problem as early as possible. Originally part of a larger database from National Institute of Diabetes and Digestive and Kidney Diseases, our Kaggle dataset—[found locally in our repository](/diabetes.csv) or [on Kaggle](https://www.kaggle.com/datasets/mathchi/diabetes-data-set)—is a subset of observations where all patients are female, at least 21 years old, and of Pima Indian Heritage. It is labeled and consists of 8 additional features. The features are diagnostic measurements contributing to diabetes such as blood pressure, pregnancy frequency, skin thickness, insulin, BMI, age, and etc. The labels represent a diabetes test result where 1 is positive and 0 is negative.
 
-Further, we will be using 3 different predictive models, **Logistic Regression, Neural Networks, and a Support Vector Machines**, and adjust the parameters of those models to see which would be the most accurate in identifying whether or not the patient has diabetes.
+Further, we will be using 3 different predictive models, **Logistic Regression, Support Vector Machines, and a Neural Networks**, and adjust the parameters of those models to see which would be the most accurate in identifying whether or not the patient has diabetes.
 
 This project aims to create a good predictive model, which would provide another way to diagnose patients and enable them to seek treatment early. Additionally, we could understand which features are more likely to increase someone’s risk of having diabetes. 
 
 
 ## Figures
+### Heatmap (Figure 1)
+
+![Heatmap](/Figures/Heatmap.jpeg)
+
+### Pairplot (Figure 2)
+
+![Pairplot](/Figures/Pairplot.jpeg)
 
 ## Methods
 
@@ -99,7 +106,7 @@ X = diabetes_cleaned
 Y = df["Outcome"]
 x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=1)
 ```
-The types of models consist of a Logistic Regression model, an Artificial Neural Network, and a Support Vector Machine with a RBF kernel.
+The types of models consist of a Logistic Regression model, a Support Vector Machine with a RBF kernel, and an Artificial Neural Network.
 
 
 
@@ -121,9 +128,26 @@ yhat_test_log_reg = log_reg_model.predict(x_test)
 ```
 
 
+### SVM
+Our second model is a `sklearn` Support Vector Machine. We created a SVM using sklearn’s `SVC` library and made a classifier that utilized a `rbf` kernel.
+
+```
+from sklearn.svm import SVC
+clf_svm_rbf = SVC(kernel='rbf')
+``` 
+In order to fit our model, we first passed in the `X_train` and `y_train` values. Then, we predicted a `y_hat` by passing the `X_test` values into our trained model. To compare metrics between the training set and testing set, we printed out classification reports for both sets.
+
+```
+clf_svm_rbf.fit(x_train, y_train)
+print("Train Metrics")
+print(classification_report(y_train, clf_svm_rbf.predict(x_train)))
+print("Test Metrics")
+print(classification_report(y_test, clf_svm_rbf.predict(x_test)))
+```
+
 
 ### Artificial Neural Network
-Our second model is an Artificial Neural Network. We utilized a `keras.models` Sequential model to compile and fit our training data. 
+Our final model is an Artificial Neural Network. We utilized a `keras.models` Sequential model to compile and fit our training data. 
 
 ```
 nn_model = Sequential()
@@ -146,25 +170,6 @@ Finally, we utilized the model to predict our `yhat` and thresholded the output 
 ```
 yhat_nn_model = nn_model.predict(x_test.astype(float))
 yhat_thres_nn_model = [1 if y>=0.5 else 0 for y in yhat_nn_model]
-```
-
-
-
-### SVM
-Our next model is a `sklearn` Support Vector Machine. We created a SVM using sklearn’s `SVC` library and made a classifier that utilized a `rbf` kernel.
-
-```
-from sklearn.svm import SVC
-clf_svm_rbf = SVC(kernel='rbf')
-``` 
-In order to fit our model, we first passed in the `X_train` and `y_train` values. Then, we predicted a `y_hat` by passing the `X_test` values into our trained model. To compare metrics between the training set and testing set, we printed out classification reports for both sets.
-
-```
-clf_svm_rbf.fit(x_train, y_train)
-print("Train Metrics")
-print(classification_report(y_train, clf_svm_rbf.predict(x_train)))
-print("Test Metrics")
-print(classification_report(y_test, clf_svm_rbf.predict(x_test)))
 ```
 
 
@@ -215,27 +220,7 @@ The model had a 0.77 accuracy on the training set and a 0.76 accuracy on the tes
 
 #### ROC Curve
 
-### Neural Network
-
-#### Accuracy
-
-##### Training Set
-|   | Precision  | Recall | F1-Score  | Support  |
-|---|---|---|---|---|
-| 0 | 0.806 | 0.895 | 0.848 | 401 |
-| 1 | 0.751 | 0.596 | 0.664 | 213 |
-
-##### Testing Set
-|   | Precision  | Recall | F1-Score  | Support  |
-|---|---|---|---|---|
-| 0 | 0.841 | 0.909 | 0.873 | 99 |
-| 1 | 0.808 | 0.690 | 0.745 | 55 |
-
-The model has a 0.79 accuracy on the training set and 0.83 accuracy on the test set.
-
-#### Fitting Graph
-
-#### ROC Graph
+![Logistic ROC Curve](/Figures/Logistic_ROC.jpeg)
 
 ### SVM
 
@@ -257,6 +242,34 @@ The model had a 0.79 accuracy on the training set and a 0.81 accuracy on the tes
 
 #### ROC Curve
 
+![SVM ROC Curve](/Figures/SVM_ROC.jpeg)
+
+### Neural Network
+
+#### Accuracy
+
+##### Training Set
+|   | Precision  | Recall | F1-Score  | Support  |
+|---|---|---|---|---|
+| 0 | 0.806 | 0.895 | 0.848 | 401 |
+| 1 | 0.751 | 0.596 | 0.664 | 213 |
+
+##### Testing Set
+|   | Precision  | Recall | F1-Score  | Support  |
+|---|---|---|---|---|
+| 0 | 0.841 | 0.909 | 0.873 | 99 |
+| 1 | 0.808 | 0.690 | 0.745 | 55 |
+
+The model has a 0.79 accuracy on the training set and 0.83 accuracy on the test set.
+
+#### Fitting Graph
+
+![Neural Network Fitting Graph](/Figures/NN_Fitting_Curve.jpeg)
+
+#### ROC Graph
+
+![Neural Network ROC Curve](/Figures/NN_ROC.jpeg)
+
 ## Discussion
 
 ### Logistic Regression
@@ -266,19 +279,19 @@ The Logistic Regression model classified the `Output` of the training set with 7
 
 In the ROC curve for both the training and testing data, the Area Under the Curve (AUC) is around 0.711 and 0.704. Random classifiers have an AUC of 0.5, which suggests no discrimination and a predictive ability that is essentially just randomly diagnosing patients. Therefore, an AUC around 0.7 is considered acceptable because it has a slightly better predictive ability than random unbiased classification. However, the optimal value for AUC should be closer to 0.8 to 0.9, so the Logistic Regression model is not an optimal model for diagnosing patients for diabetes.
 
-### Artificial Neural Network
-Our dataset consists of 8 features, tabular data relating to various health metrics, which are not linearly correlated as shown in our initial exploration of the data. Hence, predicting whether diabetes is likely or not, a binary classification problem, requires a machine learning model capable of learning a nonlinear function. We determined that an artificial Neural Network is an ideal approach as it maps tabular input to a binary output by updating weights. Other types of Neural Networks were not considered due to the nature of our data. For instance, a CNN is typically used when the dataset consists of images and thus was not considered for this task. 
-
-We utilized the Keras’s Sequential class with Dense layers to build our ANN. After experimenting with various parameters, our final model had 3 hidden layers. The first hidden layer consisted of 15 nodes and a relu activation function. When we increased or decreased the number of nodes, the accuracy decreased. 15 nodes appeared to capture enough information from the input features without the model being too complex or simple. The relu function was chosen since the data was already in a 0-1 distribution to due our MinMax preprocessing. Next, the second hidden layer contained 4 nodes and a tanh activation function. The tanh function is typically used for classification purposes and thus, when even experimenting with different functions, tanh yielded the highest accuracy. With another layer of weights being adjusted from the 15 node layer to 4 node layer, this second hidden layer captures the most important features relevant to the output and thus, improves the overall accuracy of the model. Lastly, the output layer had 1 node and a sigmoid activation function. Since, this is a binary classification problem a sigmoid function with 1 node was used to determine the probability of the true class.
-
-The Neural Network model was the best performing at 0.83 accuracy. When comparing the ROC curves of all models, only the Neural Network curve had an AUC value in the optimal range (0.809). Thus, this indicates it has the best performance. We mentioned above that the logistic model showed underfitting. For the Neural Network fitting graph, the optimally fitted space was found when training for 1000 epochs as the testing set error was below the training set error. Thus, we trained our model for 1000 epochs to minimize underfitting and overfitting. More optimal fitting of the Neural Network could contribute to its better performance over the logistic regression model. In comparison with the SVM, its accuracy improved from the logistic model but was still worse than the Neural Network. Since our data was nonlinear, the structure of a Neural Network which updates its weights to map the input to an output value could have been simpler than the SVM’s approach of finding an optimal classification line by choosing a kernel. These differences between models could support the high accuracy of the Neural Network. 
-
 ### SVM
 We created an SVM model because we wanted to leverage an SVM’s ability to find an optimal classification line through margin maximization. Additionally, we wanted to use the kernels to help us better separate our data.
 
 Our SVM model utilized an rbf kernel. This had an accuracy of 79% on the training set and an accuracy of 81% on the testing set. These metrics indicated that this model performed marginally better than our logistic regression model. This difference can likely be attributed to two factors: the SVM margin optimization and the behavior of the RBF kernel. As mentioned above, the SVM will maximize the margin between the classification line and the separate classes. This determines an optimal classification and reduces the chances of data points being misclassified. Additionally, the rbf kernel will transform the data, which may initially be difficult to separate into distinct classes. This transformation could allow this model to perform better than a logistic regression classifier.
 
 In the ROC curve for both the training and testing data, the Area Under the Curve (AUC) is around 0.739 and 0.752, respectively. These metrics are acceptable but not optimal, as they perform better than a random classifier with an AUC of 0.5, but do not fall within the optimal range of 0.8 to 0.9. Using more training data or better adjusting the model parameters could potentially yield more accurate results in the future.
+
+### Artificial Neural Network
+Our dataset consists of 8 features, tabular data relating to various health metrics, which are not linearly correlated as shown in our initial exploration of the data. Hence, predicting whether diabetes is likely or not, a binary classification problem, requires a machine learning model capable of learning a nonlinear function. We determined that an artificial Neural Network is an ideal approach as it maps tabular input to a binary output by updating weights. Other types of Neural Networks were not considered due to the nature of our data. For instance, a CNN is typically used when the dataset consists of images and thus was not considered for this task. 
+
+We utilized the Keras’s Sequential class with Dense layers to build our ANN. After experimenting with various parameters, our final model had 3 hidden layers. The first hidden layer consisted of 15 nodes and a relu activation function. When we increased or decreased the number of nodes, the accuracy decreased. 15 nodes appeared to capture enough information from the input features without the model being too complex or simple. The relu function was chosen since the data was already in a 0-1 distribution to due our MinMax preprocessing. Next, the second hidden layer contained 4 nodes and a tanh activation function. The tanh function is typically used for classification purposes and thus, when even experimenting with different functions, tanh yielded the highest accuracy. With another layer of weights being adjusted from the 15 node layer to 4 node layer, this second hidden layer captures the most important features relevant to the output and thus, improves the overall accuracy of the model. Lastly, the output layer had 1 node and a sigmoid activation function. Since, this is a binary classification problem a sigmoid function with 1 node was used to determine the probability of the true class.
+
+The Neural Network model was the best performing at 0.83 accuracy. When comparing the ROC curves of all models, only the Neural Network curve had an AUC value in the optimal range (0.809). Thus, this indicates it has the best performance. We mentioned above that the logistic model showed underfitting. For the Neural Network fitting graph, the optimally fitted space was found when training for 1000 epochs as the testing set error was below the training set error. Thus, we trained our model for 1000 epochs to minimize underfitting and overfitting. More optimal fitting of the Neural Network could contribute to its better performance over the logistic regression model. In comparison with the SVM, its accuracy improved from the logistic model but was still worse than the Neural Network. Since our data was nonlinear, the structure of a Neural Network which updates its weights to map the input to an output value could have been simpler than the SVM’s approach of finding an optimal classification line by choosing a kernel. These differences between models could support the high accuracy of the Neural Network. 
 
 ## Conclusion
 Overall, all of the models resulted in over 75% accuracy for the testing data, with the Neural Network being the best model with a 83% test data accuracy. For future work, we would want to see which model contains more false positives and which has more false negatives. This is because we would want to avoid false negatives when dealing with diseases such as diabetes, when identification is important. A way that we could reduce false negatives in our results would be to reduce the threshold value, and determine a value that would decrease false negatives while maintaining the accuracy that we have obtained with our existing models.
@@ -305,3 +318,4 @@ We all collaborated equally for the first milestone. For the second milestone, I
 
 ### Sanjana Aithal
 We all worked on the first proposal together. For the milestones, I also assisted the group by programming the data preprocessing which included normalizing and cleaning the data. For the final submission, I wrote the Methods section and formatted the text for the final paper. We proofread our report together. Overall, we all worked together collaboratively to address challenges, and were there to always help each other throughout the quarter.
+
