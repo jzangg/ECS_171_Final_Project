@@ -3,8 +3,8 @@
 ## Milestones
 |Due Date| Milestone |Notebook|
 |---|---|---|
-| November 20 | Data Exploration  | [ECS171_Data_Exploration.ipynb](ECS171_Data_Exploration.ipynb)   |
-| November 28 | Preprocessing & First Model Building and Evaluation  | [Preprocessing_First_Model_building.ipynb](Preprocessing_First_Model_building.ipynb)  |
+| November 20 | Data Exploration  | [ECS171_Data_Exploration.ipynb](/Milestones/ECS171_Data_Exploration.ipynb)   |
+| November 28 | Preprocessing & First Model Building and Evaluation  | [Preprocessing_First_Model_building.ipynb](/Milestones/Preprocessing_First_Model_building.ipynb)  |
 |  December 5 | Final Paper |   |
 
 ## Introduction
