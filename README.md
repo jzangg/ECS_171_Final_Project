@@ -12,7 +12,7 @@
 
 For our project, we wanted to predict if an individual has diabetes based on a variety of factors in order to diagnose the problem as early as possible. Originally part of a larger database from National Institute of Diabetes and Digestive and Kidney Diseases, our Kaggle dataset—[found locally in our repository](/diabetes.csv) or [on Kaggle](https://www.kaggle.com/datasets/mathchi/diabetes-data-set)—is a subset of observations where all patients are female, at least 21 years old, and of Pima Indian Heritage. It is labeled and consists of 8 additional features. The features are diagnostic measurements contributing to diabetes such as blood pressure, pregnancy frequency, skin thickness, insulin, BMI, age, and etc. The labels represent a diabetes test result where 1 is positive and 0 is negative.
 
-Further, we will be using 3 different predictive models, **Logistic Regression, Support Vector Machines, and a Neural Networks**, and adjust the parameters of those models to see which would be the most accurate in identifying whether or not the patient has diabetes.
+Further, we will be using 3 different predictive models, **Logistic Regression, Support Vector Machines, and Neural Networks**, and adjust the parameters of those models to see which would be the most accurate in identifying whether or not the patient has diabetes.
 
 This project aims to create a good predictive model, which would provide another way to diagnose patients and enable them to seek treatment early. Additionally, we could understand which features are more likely to increase someone’s risk of having diabetes. 
 
@@ -218,7 +218,7 @@ plt.show()
 
 The model had a 0.77 accuracy on the training set and a 0.76 accuracy on the testing set. 
 
-#### ROC Curve
+#### Logistic Regression ROC Curve
 
 ![Logistic ROC Curve](/Figures/Logistic_ROC.jpeg)
 
@@ -240,7 +240,7 @@ The model had a 0.77 accuracy on the training set and a 0.76 accuracy on the tes
 
 The model had a 0.79 accuracy on the training set and a 0.81 accuracy on the testing set.
 
-#### ROC Curve
+#### SVM ROC Curve
 
 ![SVM ROC Curve](/Figures/SVM_ROC.jpeg)
 
@@ -266,7 +266,7 @@ The model has a 0.79 accuracy on the training set and 0.83 accuracy on the test 
 
 ![Neural Network Fitting Graph](/Figures/NN_Fitting_Curve.jpeg)
 
-#### ROC Graph
+#### Neural Network ROC Curve
 
 ![Neural Network ROC Curve](/Figures/NN_ROC.jpeg)
 
@@ -296,7 +296,7 @@ The Neural Network model was the best performing at 0.83 accuracy. When comparin
 ## Conclusion
 Overall, all of the models resulted in over 75% accuracy for the testing data, with the Neural Network being the best model with a 83% test data accuracy. For future work, we would want to see which model contains more false positives and which has more false negatives. This is because we would want to avoid false negatives when dealing with diseases such as diabetes, when identification is important. A way that we could reduce false negatives in our results would be to reduce the threshold value, and determine a value that would decrease false negatives while maintaining the accuracy that we have obtained with our existing models.
 
-Our current dataset is limited to a set of observations where the patients are female, 21 years or older, and of Pima Indian heritage. While we can still make observations based off of the results of our current predictive models, other important features, such as ethnicity, sex, or region, may affect an individual’s risk of diabetes. Our current model does a good job for predicting if a female of Pima Indian heritage has diabetes, but this could lead to bias when trying to predict someone of a different background. In the future, we would like to expand the dataset to produce even more accurate predictive models that can be applied to a broader population. Gathering and testing with more data from different demographics would help reduce the bias in our current models. With this, we can compare models and see how different features impact people of different regions/genders/etc, and our models would be more beneficial in identifying diabetes in any patient.
+Our current dataset is limited to a set of observations where the patients are female, 21 years or older, and of Pima Indian heritage. While we can still make observations based off of the results of our current predictive models, other important features, such as ethnicity, sex, or region, may affect an individual’s risk of diabetes. Our current model does a good job for predicting if a female of Pima Indian heritage has diabetes, but this could lead to bias when trying to predict someone of a different background. In the future, we would like to expand the dataset to produce even more accurate predictive models that can be applied to a broader population. Gathering and testing with more data from different demographics would help reduce the bias in our current models. With this, we can compare models and see how different features impact people of different regions, genders, etc., and our models would be more beneficial in identifying diabetes in any patient.
 
 Additionally, we could determine which features contribute more to diabetes and create newer models based on those features. Some features have some correlation to each other, and we believe that by reducing the number of features the model contains, we could create a more accurate model and acknowledge which features are the most relevant to predicting if an individual has diabetes.
 
