@@ -32,8 +32,16 @@
 #### Accuracy
 
 ##### Training Set
+|   | Precision  | Recall | F1-Score  | Support  |
+|---|---|---|---|---|
+| 0 |   |   |   |   |
+| 1 |   |   |   |   |
 
 ##### Testing Set
+|   | Precision  | Recall | F1-Score  | Support  |
+|---|---|---|---|---|
+| 0 |   |   |   |   |
+| 1 |   |   |   |   |
 
 #### ROC Curve
 
@@ -42,8 +50,17 @@
 #### Accuracy
 
 ##### Training Set
+|   | Precision  | Recall | F1-Score  | Support  |
+|---|---|---|---|---|
+| 0 |   |   |   |   |
+| 1 |   |   |   |   |
 
 ##### Testing Set
+|   | Precision  | Recall | F1-Score  | Support  |
+|---|---|---|---|---|
+| 0 |   |   |   |   |
+| 1 |   |   |   |   |
+
 
 #### Fitting Graph
 
@@ -54,8 +71,16 @@
 #### Accuracy
 
 ##### Training Set
+|   | Precision  | Recall | F1-Score  | Support  |
+|---|---|---|---|---|
+| 0 |   |   |   |   |
+| 1 |   |   |   |   |
 
 ##### Testing Set
+|   | Precision  | Recall | F1-Score  | Support  |
+|---|---|---|---|---|
+| 0 |   |   |   |   |
+| 1 |   |   |   |   |
 
 #### ROC Curve
 
